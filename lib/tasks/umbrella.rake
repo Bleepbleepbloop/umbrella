@@ -45,6 +45,7 @@ h_temp = currently.fetch("temperature")
 
 
 p "The current temperature is #{c_temp} at your location #{lat},#{lng}"
+p "The outlook for the next hour is #{h_temp}"
 
 
 
