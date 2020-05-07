@@ -37,15 +37,23 @@ currently = weather_parsed_file.fetch("currently")
 c_temp = currently.fetch("temperature")
 
 # fetch hourly temp
-hourly = weather_parsed_file.fetch("hourly")
-h_temp = currently.fetch("temperature")
+p hourly = weather_parsed_file.fetch("hourly")
+# p data_temp = hourly.fetch("data")
+# p h_temp = data_temp.fetch("temperature").to_s
 
-#compute probability of rain
-#do this
+# #compute probability of rain
+# p h_temp
+# d_0 = hourly[0].fetch("temperature")
+
+# p d_0
+
+
 
 
 p "The current temperature is #{c_temp} at your location #{lat},#{lng}"
-p "The outlook for the next hour is #{h_temp}"
+p "The temperature outlook for the next hour is #{h_temp}"
+
+
 
 
 
