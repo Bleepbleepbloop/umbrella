@@ -1,10 +1,9 @@
 task(:umbrella) do
-p "hai doggie"
 
 ENV.fetch("DARKSKY_API_KEY")
 ENV.fetch("GEOCODING_API_KEY")
 
-place_input = "merchandise mart"
+place_input = "seattle"
 user_address = place_input.gsub(" ", "%20")
 
 
@@ -37,24 +36,26 @@ currently = weather_parsed_file.fetch("currently")
 c_temp = currently.fetch("temperature")
 
 # fetch hourly temp
-p hourly = weather_parsed_file.fetch("hourly")
-# p data_temp = hourly.fetch("data")
-# p h_temp = data_temp.fetch("temperature").to_s
+hourly = weather_parsed_file.fetch("hourly")
+data_temp = hourly.fetch("data")
+now = data_temp[0]
+h_temp = now.fetch("temperature")
 
-# #compute probability of rain
-# p h_temp
-# d_0 = hourly[0].fetch("temperature")
+n = 0
 
-# p d_0
+while n < 12
+  if data_temp[n].fetch("precipProbability") < 0.50
+  n = n+1
+  p data_temp[n].fetch("precipProbability")
+  p n
+  elsif 
+    p "Bring an Umbrella!"
+  end
+end
+  
 
-
-
-
-p "The current temperature is #{c_temp} at your location #{lat},#{lng}"
-p "The temperature outlook for the next hour is #{h_temp}"
-
-
-
+p "The current temperature is #{c_temp} degrees at your location #{lat},#{lng}."
+p "The temperature outlook for the next hour is #{h_temp} degrees."
 
 
 end
