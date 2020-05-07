@@ -4,21 +4,48 @@ p "hai doggie"
 ENV.fetch("DARKSKY_API_KEY")
 ENV.fetch("GEOCODING_API_KEY")
 
-user_location = "merchandise mart"
+place_input = "merchandise mart"
+user_address = place_input.gsub(" ", "%20")
 
-map_url = ("https://maps.googleapis.com/maps/api/geocode/json?address=" + user_location + "&key=" + ENV.fetch("GEOCODING_API_KEY"))
+
+map_url = ("https://maps.googleapis.com/maps/api/geocode/json?address=" + user_address + "&key=" + ENV.fetch("GEOCODING_API_KEY"))
+map_url
 map_raw_file = open(map_url).read
 map_parsed_file = JSON.parse(map_raw_file)
 
-latitude = "40.1"
-longitude = "50.1"
+#FETCH LATITUDE LONGITUDE
+r = map_parsed_file.fetch("results")
+# ap r[0].keys
+r_0 = r[0].fetch("geometry")
+location = r_0.fetch("location")
+lat = location.fetch("lat").to_s
+lng = location.fetch("lng").to_s
 
-weather_url = ("https://api.darksky.net/forecast/" + ENV.fetch("DARKSKY_API_KEY") + "/" + latitude + "," + longitude)
+
+            #           "geometry" => {
+            #          "location" => {
+            #         "lat" => 41.8889772,
+            #         "lng" => -87.6339836
+
+
+weather_url = ("https://api.darksky.net/forecast/" + ENV.fetch("DARKSKY_API_KEY") + "/" + lat + "," + lng)
 weather_raw_file = open(weather_url).read
 weather_parsed_file = JSON.parse(weather_raw_file)
 
   # FETCH CURRENT TEMPERATURE
 currently = weather_parsed_file.fetch("currently")
-ap currently.fetch("temperature")
+c_temp = currently.fetch("temperature")
+
+# fetch hourly temp
+hourly = weather_parsed_file.fetch("hourly")
+h_temp = currently.fetch("temperature")
+
+#compute probability of rain
+#do this
+
+
+p "The current temperature is #{c_temp} at your location #{lat},#{lng}"
+
+
 
 end
